@@ -10,4 +10,6 @@ git config --global user.name 'Github Actions Michal'
 git config --global user.email 'michal.klempa@gmail.com'
 git add Dockerfile
 git commit -m"Upstream version bump to ${AZCOPY_VERSION}"
+git tag -f "v${AZCOPY_VERSION}"
+git push --tags
 git push
