@@ -1,4 +1,4 @@
-ARG UPSTREAM_URL=https://azcopyvnext.azureedge.net/release20200709/azcopy_linux_amd64_10.5.0.tar.gz
+ARG UPSTREAM_URL=https://azcopyvnext.azureedge.net/release20201211/azcopy_linux_amd64_10.8.0.tar.gz
 
 FROM debian:focal
 ARG UPSTREAM_URL
