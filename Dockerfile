@@ -1,6 +1,6 @@
 ARG UPSTREAM_URL=https://azcopyvnext.azureedge.net/release20201211/azcopy_linux_amd64_10.8.0.tar.gz
 
-FROM debian:focal
+FROM ubuntu:focal
 ARG UPSTREAM_URL
 RUN apt-get update \
   && apt-get -y --no-install-recommends install ca-certificates curl apt-transport-https lsb-release gnupg bash-completion jq \
@@ -22,4 +22,12 @@ RUN HELM_VERSION=$(curl  -H "Accept: application/vnd.github.v3+json" https://api
 RUN HELMFILE_VERSION=$(curl  -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/roboll/helmfile/releases/latest | jq -r ".tag_name") \
   && curl -sL https://github.com/roboll/helmfile/releases/download/${HELMFILE_VERSION}/helmfile_linux_amd64 -o /usr/local/bin/helmfile \
   && chmod a+x /usr/local/bin/helmfile
+RUN printf '%s\n' \
+          "if ! shopt -oq posix; then" \
+          "  if [ -f /usr/share/bash-completion/bash_completion ]; then" \
+          "    . /usr/share/bash-completion/bash_completion" \
+          "  elif [ -f /etc/bash_completion ]; then" \
+          "    . /etc/bash_completion" \
+          "  fi" \
+          "fi" >> /etc/bash.bashrc
 CMD ["/bin/bash"]
